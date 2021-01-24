@@ -435,5 +435,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxColumns: 11
   bricksAmount: 22
+  startPosition: {x: -5, y: 4.5, z: 0}
   brickPrefab: {fileID: 1239918450641911465, guid: 23c4d5ba94225bc42af34632fdcdc564,
     type: 3}
