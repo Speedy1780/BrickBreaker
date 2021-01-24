@@ -4,7 +4,16 @@ public class SwipeMovement : Movement
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private AnimationCurve horizontalLimit;
-    [SerializeField] private Vector3 playerPosition;
+    private Vector3 playerPosition;
+
+    protected override void Start()
+    {
+        base.Start();
+        if (mainCamera == null)
+            mainCamera = Camera.main;
+
+        playerPosition = myTransform.position;
+    }
 
     protected override void MovePlayer()
     {
