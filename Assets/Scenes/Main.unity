@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 3011427}
   m_Layer: 0
   m_Name: Brick_3
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 14990038}
   m_Layer: 0
   m_Name: Brick_0
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 124800668}
   m_Layer: 0
   m_Name: Brick_4
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -415,7 +415,7 @@ GameObject:
   - component: {fileID: 164111860}
   m_Layer: 0
   m_Name: Brick_1
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 231996347}
   m_Layer: 0
   m_Name: Brick_17
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 234927505}
   m_Layer: 0
   m_Name: Brick_18
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,7 +694,7 @@ GameObject:
   - component: {fileID: 302845915}
   m_Layer: 0
   m_Name: Brick_10
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 332751508}
   m_Layer: 0
   m_Name: Brick_6
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 467539702}
   m_Layer: 0
   m_Name: Brick_20
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1007,7 +1007,7 @@ GameObject:
   - component: {fileID: 602542809}
   m_Layer: 0
   m_Name: Brick_19
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1100,7 +1100,7 @@ GameObject:
   - component: {fileID: 617731015}
   m_Layer: 0
   m_Name: Brick_7
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1287,7 +1287,7 @@ GameObject:
   - component: {fileID: 796760329}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1361,7 +1361,7 @@ Transform:
   m_GameObject: {fileID: 796760323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.5, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_LocalScale: {x: 2, y: 0.2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1544,7 +1544,7 @@ GameObject:
   - component: {fileID: 885949745}
   m_Layer: 0
   m_Name: Brick_5
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1720,7 +1720,7 @@ GameObject:
   - component: {fileID: 981342896}
   m_Layer: 0
   m_Name: Brick_11
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1813,7 +1813,7 @@ GameObject:
   - component: {fileID: 1047929509}
   m_Layer: 0
   m_Name: Brick_13
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1906,7 +1906,7 @@ GameObject:
   - component: {fileID: 1301983385}
   m_Layer: 0
   m_Name: Brick_14
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2043,7 +2043,7 @@ GameObject:
   - component: {fileID: 1624239292}
   m_Layer: 0
   m_Name: Brick_8
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2136,7 +2136,7 @@ GameObject:
   - component: {fileID: 1662608520}
   m_Layer: 0
   m_Name: Brick_21
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2273,7 +2273,7 @@ GameObject:
   - component: {fileID: 1890790338}
   m_Layer: 0
   m_Name: Brick_16
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2366,7 +2366,7 @@ GameObject:
   - component: {fileID: 1895930971}
   m_Layer: 0
   m_Name: Brick_2
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2459,7 +2459,7 @@ GameObject:
   - component: {fileID: 1907240356}
   m_Layer: 0
   m_Name: Brick_12
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2666,7 +2666,7 @@ GameObject:
   - component: {fileID: 2113704951}
   m_Layer: 0
   m_Name: Brick_15
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2759,7 +2759,7 @@ GameObject:
   - component: {fileID: 2138409224}
   m_Layer: 0
   m_Name: Brick_9
-  m_TagString: Untagged
+  m_TagString: Brick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
