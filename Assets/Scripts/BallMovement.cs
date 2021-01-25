@@ -2,6 +2,8 @@
 
 public class BallMovement : MonoBehaviour
 {
+    private const int BallLayer = 9;
+    private const int IgnorePhysicsLayer = 8;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 4;
     Vector3 lastVelocity;
@@ -40,5 +42,17 @@ public class BallMovement : MonoBehaviour
         //Prevent ball being stuck in place
         if (rb.velocity.magnitude == 0)
             rb.velocity = Vector3.up * speed;
+    }
+
+    public void Shoot(Vector3 direction)
+    {
+        rb.velocity = direction * speed;
+        Invoke("Active", 0.2f);
+    }
+
+    void Active()
+    {
+        gameObject.layer = BallLayer;
+
     }
 }
