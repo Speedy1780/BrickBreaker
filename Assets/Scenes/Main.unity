@@ -2305,11 +2305,12 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 0000000001000000
-    _keys: 0000000001000000
+    _keyValues: 000000000100000002000000
+    _keys: 000000000100000002000000
     _values:
     - {fileID: 11400000, guid: f684d67b0a8eea54fa5a848e1e5a9f73, type: 2}
     - {fileID: 11400000, guid: 3776d10a33f945f4fbc5153641cc2eb5, type: 2}
+    - {fileID: 11400000, guid: 8b9bdf5b55ada784e95cb1bed7c71d1b, type: 2}
 --- !u!1 &1680606148
 GameObject:
   m_ObjectHideFlags: 0

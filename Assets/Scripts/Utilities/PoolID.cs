@@ -1,5 +1,6 @@
 ﻿public enum PoolID
 {
     Ball,
-    Brick
+    Brick,
+    PowerUp
 }
