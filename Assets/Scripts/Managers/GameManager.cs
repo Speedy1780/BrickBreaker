@@ -6,21 +6,28 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int numberOfLifes = 2;
     [SerializeField] private PlayerShooting player;
     [SerializeField] private Transform brickParents;
+    [SerializeField] private float timeTransitionSpeed;
+
+    private float slowMotionDuration;
 
     private void OnEnable()
     {
-        EventManager.lifeLost += LifeLost;
+        EventManager.ELifeLost += LifeLost;
+        EventManager.ESlowTime += ActivateSlowMotion;
     }
+
+
 
     private void OnDisable()
     {
-        EventManager.lifeLost -= LifeLost;
+        EventManager.ELifeLost -= LifeLost;
+        EventManager.ESlowTime -= ActivateSlowMotion;
     }
 
     private void Start()
     {
         player.StartShoot();
-        StartCoroutine(EndGame());
+        StartCoroutine(WaitForEndGame());
     }
 
     private void LifeLost()
@@ -33,7 +40,38 @@ public class GameManager : Singleton<GameManager>
             player.StartShoot();
     }
 
-    IEnumerator EndGame()
+    private void ActivateSlowMotion(float duration, float factor)
+    {
+        if (slowMotionDuration <= 0)
+            StartCoroutine(SlowTime(factor));
+
+        slowMotionDuration += duration;
+    }
+
+    IEnumerator SlowTime(float factor)
+    {
+        yield return StartCoroutine(ScaleTime(factor));
+
+        while (slowMotionDuration > 0)
+        {
+            slowMotionDuration -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        slowMotionDuration = 0;
+        yield return StartCoroutine(ScaleTime(1));
+    }
+
+    IEnumerator ScaleTime(float target)
+    {
+        while (Time.timeScale != target)
+        {
+            Time.timeScale = Mathf.MoveTowards(Time.timeScale, target, timeTransitionSpeed * Time.unscaledDeltaTime);
+            yield return null;
+        }
+    }
+
+    IEnumerator WaitForEndGame()
     {
         yield return new WaitUntil(() => brickParents.childCount == 0);
         Debug.Log("Game won");

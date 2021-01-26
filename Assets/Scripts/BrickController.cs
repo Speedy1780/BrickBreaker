@@ -7,6 +7,7 @@ public class BrickController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        EventManager.InvokeSpawnPower(transform.position);
         EventManager.InvokeAddScore(score);
         PoolManager.Instance.AddToPool(ID, gameObject);
     }
