@@ -4,20 +4,21 @@ public class SpawnBricks : MonoBehaviour
 {
     [SerializeField] private int maxColumns = 11;
     [SerializeField] private int bricksAmount = 22;
-    [SerializeField] private Vector3 startPosition;
     [SerializeField] private GameObject brickPrefab;
+    [SerializeField] private Vector3 startPosition;
 
     /// <summary>
     /// Place bricks in a grid layout
     /// </summary>
-    public void PlaceBricks()
+    public void PlaceBricks(bool usePool = true)
     {
         DeleteChildren();
         int row;
         int column;
         for (int brickIndex = 0; brickIndex < bricksAmount; brickIndex++)
         {
-            GameObject brick = Instantiate(brickPrefab, transform);
+            GameObject brick = usePool ? PoolManager.Instance.GetPooledObject(PoolID.Brick) : Instantiate(brickPrefab);
+            brick.transform.SetParent(transform);
             brick.name = $"Brick_{brickIndex}";
             brick.transform.SetParent(transform);
             row = Mathf.FloorToInt(brickIndex / maxColumns);

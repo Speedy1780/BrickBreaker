@@ -6,6 +6,6 @@ public class Spawn : EditorWindow
     static void SpawnBricks(MenuCommand command)
     {
         SpawnBricks body = (SpawnBricks)command.context;
-        body.PlaceBricks();
+        body.PlaceBricks(false);
     }
 }

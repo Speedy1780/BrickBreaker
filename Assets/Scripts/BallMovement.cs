@@ -32,7 +32,7 @@ public class BallMovement : MonoBehaviour
 
 
             if (collision.gameObject.CompareTag("Brick"))
-                Destroy(collision.gameObject);
+                PoolManager.Instance.AddToPool(PoolID.Brick, collision.gameObject);
         }
     }
 
