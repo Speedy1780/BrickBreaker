@@ -5,7 +5,7 @@ public class BallMovement : MonoBehaviour
     private const int BallLayer = 9;
     private const int IgnorePhysicsLayer = 8;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float speed = 4;
+    [SerializeField] private float speed = 7;
     Vector3 lastVelocity;
     Transform myTransform;
     PoolID ID => PoolID.Ball;
@@ -23,17 +23,9 @@ public class BallMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             rb.velocity = (myTransform.position - collision.transform.position).normalized * speed;
-        }
         else
-        {
             Bounce(collision.GetContact(0).normal);
-
-
-            if (collision.gameObject.CompareTag("Brick"))
-                PoolManager.Instance.AddToPool(PoolID.Brick, collision.gameObject);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
