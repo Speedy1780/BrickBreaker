@@ -2,6 +2,15 @@
 
 public class FactoryManager : Singleton<FactoryManager>
 {
+    private void Start()
+    {
+        foreach (GameObject powerUp in Catalog[PoolID.PowerUp].CategoryItems)
+        {
+            GameObject p = Instantiate(powerUp);
+            PoolManager.Instance.AddToPool(PoolID.PowerUp, p);
+        }
+    }
+
     public FactoryCatalog Catalog;
 
     public GameObject GetItem(PoolID id)
