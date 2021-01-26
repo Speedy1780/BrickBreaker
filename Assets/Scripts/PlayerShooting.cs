@@ -9,8 +9,9 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private LineRenderer line;
 
     private Transform myTransform;
+    private Vector3[] defaultPoints;
 
-    void Start()
+    void Awake()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -18,11 +19,16 @@ public class PlayerShooting : MonoBehaviour
             movement = GetComponent<Movement>();
 
         myTransform = transform;
-        StartCoroutine(Shoot());
+        defaultPoints = new Vector3[] { Vector3.zero, Vector3.zero };
     }
+
+    public void StartShoot() => StartCoroutine(Shoot());
 
     IEnumerator Shoot()
     {
+        movement.enabled = false;
+        line.enabled = true;
+        line.SetPositions(defaultPoints);
         BallMovement ball = PoolManager.Instance.GetPooledObject(PoolID.Ball).GetComponent<BallMovement>();
         ball.transform.SetPositionAndRotation(spawnPoint.position, Quaternion.identity);
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
