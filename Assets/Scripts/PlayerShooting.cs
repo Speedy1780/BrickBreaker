@@ -5,7 +5,6 @@ public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private BallMovement ballPrefab;
     [SerializeField] private Movement movement;
     [SerializeField] private LineRenderer line;
 
@@ -24,7 +23,8 @@ public class PlayerShooting : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        BallMovement ball = Instantiate(ballPrefab, spawnPoint.position, Quaternion.identity);
+        BallMovement ball = PoolManager.Instance.GetPooledObject(PoolID.Ball).GetComponent<BallMovement>();
+        ball.transform.SetPositionAndRotation(spawnPoint.position, Quaternion.identity);
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         Debug.Log("Key down");
         line.SetPosition(0, myTransform.InverseTransformPoint(spawnPoint.position));
