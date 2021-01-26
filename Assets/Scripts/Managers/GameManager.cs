@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         player.StartShoot();
+        UIManager.Instance.SetLife(numberOfLifes);
     }
 
     private void GameEnded()
@@ -36,6 +37,7 @@ public class GameManager : Singleton<GameManager>
     private void LifeLost()
     {
         numberOfLifes -= 1;
+        UIManager.Instance.SetLife(numberOfLifes);
 
         if (numberOfLifes < 0)
             Debug.Log("Game Over");
