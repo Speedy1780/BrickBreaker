@@ -3,9 +3,11 @@
 public class BrickController : MonoBehaviour
 {
     [SerializeField] private int score = 100;
+    private static PoolID ID => PoolID.Brick;
 
-    private void OnDisable()
+    private void OnCollisionEnter(Collision collision)
     {
         EventManager.InvokeAddScore(score);
+        PoolManager.Instance.AddToPool(ID, gameObject);
     }
 }
