@@ -979,6 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef94fbc3d08c5640a8676407dc38ec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleSpeed: 2
   mainCamera: {fileID: 963194227}
   horizontalLimit:
     serializedVersion: 2
@@ -2830,6 +2831,7 @@ MonoBehaviour:
   numberOfLifes: 2
   player: {fileID: 796760330}
   brickParents: {fileID: 2043353350}
+  timeTransitionSpeed: 1
 --- !u!1 &1800705401
 GameObject:
   m_ObjectHideFlags: 0

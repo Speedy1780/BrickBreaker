@@ -17,4 +17,8 @@ public class EventManager
     public delegate void DoubleSize(float duration);
     public static event DoubleSize EDoubleSize;
     public static void InvokeDoubleSize(float duration) => EDoubleSize?.Invoke(duration);
+
+    public delegate void SlowTime(float duration, float factor);
+    public static event SlowTime ESlowTime;
+    public static void InvokeSlowTime(float duration, float factor) => ESlowTime?.Invoke(duration, factor);
 }
