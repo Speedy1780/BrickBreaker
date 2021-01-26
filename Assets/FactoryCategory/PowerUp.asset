@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PowerUp
   m_EditorClassIdentifier: 
   CategoryItems:
-  - {fileID: 3352033284236749472, guid: 547f5194637394f48a5b881464149a5f, type: 3}
+  - {fileID: 3352033284236749472, guid: d86e63efdcdfd204cb47868887f2db26, type: 3}

@@ -21,4 +21,8 @@ public class EventManager
     public delegate void SlowTime(float duration, float factor);
     public static event SlowTime ESlowTime;
     public static void InvokeSlowTime(float duration, float factor) => ESlowTime?.Invoke(duration, factor);
+
+    public delegate void DoubleBalls();
+    public static event DoubleBalls EDoubleBalls;
+    public static void InvokeDoubleBalls() => EDoubleBalls?.Invoke();
 }

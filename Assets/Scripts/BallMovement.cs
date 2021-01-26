@@ -2,8 +2,11 @@
 
 public class BallMovement : MonoBehaviour
 {
+    private const int maxBalls = 3;
     private const int BallLayer = 9;
     private const int IgnorePhysicsLayer = 8;
+    private static int ballCount = 0;
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 7;
     Vector3 lastVelocity;
@@ -16,6 +19,16 @@ public class BallMovement : MonoBehaviour
             rb = GetComponent<Rigidbody>();
 
         myTransform = transform;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.EDoubleBalls += SpawnBalls;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.EDoubleBalls -= SpawnBalls;
     }
 
     private void LateUpdate() => lastVelocity = rb.velocity;
@@ -33,7 +46,9 @@ public class BallMovement : MonoBehaviour
         if (other.CompareTag("Respawn"))
         {
             Deactivate();
-            EventManager.InvokeLifeLost();
+
+            if (ballCount == 0)
+                EventManager.InvokeLifeLost();
         }
     }
 
@@ -52,12 +67,28 @@ public class BallMovement : MonoBehaviour
         Invoke(nameof(Activate), 0.2f);
     }
 
-    void Activate() => gameObject.layer = BallLayer;
+    void Activate()
+    {
+        gameObject.layer = BallLayer;
+        ballCount++;
+    }
 
     void Deactivate()
     {
+        ballCount -= 1;
         PoolManager.Instance.AddToPool(ID, gameObject);
         gameObject.layer = IgnorePhysicsLayer;
         rb.velocity = Vector3.zero;
+    }
+
+    void SpawnBalls()
+    {
+        for (; ballCount < maxBalls; ballCount++)
+        {
+            GameObject ball = PoolManager.Instance.GetPooledObject(ID);
+            ball.transform.SetPositionAndRotation(myTransform.position, Quaternion.identity);
+            ball.layer = BallLayer;
+            ball.GetComponent<Rigidbody>().velocity = Quaternion.Euler(Vector3.forward * Random.Range(-45, 45f)) * rb.velocity;
+        }
     }
 }
