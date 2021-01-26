@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3352033284236749473}
   - component: {fileID: -2161590690549563407}
   m_Layer: 10
-  m_Name: DoubleSize 1
+  m_Name: SlowTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 901fd8aea3604f44995f61320ae6c273, type: 2}
+  - {fileID: 2100000, guid: e6cf9ec7b251ddf499c7913665b937af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
