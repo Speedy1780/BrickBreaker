@@ -30,7 +30,7 @@ public class GameManager : Singleton<GameManager>
 
     private void GameEnded()
     {
-        Debug.Log("game ended");
+        Debug.Log("Game Ended");
     }
 
     private void LifeLost()
