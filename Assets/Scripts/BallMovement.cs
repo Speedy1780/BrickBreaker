@@ -27,12 +27,14 @@ public class BallMovement : MonoBehaviour
     {
         EventManager.EDoubleBalls += SpawnBalls;
         EventManager.EFireBalls += ActivateFireBalls;
+        EventManager.EGameEnded += Deactivate;
     }
 
     private void OnDisable()
     {
         EventManager.EDoubleBalls -= SpawnBalls;
         EventManager.EFireBalls -= ActivateFireBalls;
+        EventManager.EGameEnded -= Deactivate;
     }
 
     private void LateUpdate()

@@ -22,6 +22,6 @@ public class BrickController : MonoBehaviour
         brickCount -= 1;
 
         if (brickCount <= 0)
-            Debug.Log("Game ended");
+            EventManager.InvokeGameEnded();
     }
 }

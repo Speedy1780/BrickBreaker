@@ -12,18 +12,25 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EventManager.ELifeLost += LifeLost;
+        EventManager.EGameEnded += GameEnded;
         EventManager.ESlowTime += ActivateSlowMotion;
     }
 
     private void OnDisable()
     {
         EventManager.ELifeLost -= LifeLost;
+        EventManager.EGameEnded -= GameEnded;
         EventManager.ESlowTime -= ActivateSlowMotion;
     }
 
     private void Start()
     {
         player.StartShoot();
+    }
+
+    private void GameEnded()
+    {
+        Debug.Log("game ended");
     }
 
     private void LifeLost()
