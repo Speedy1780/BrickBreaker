@@ -39,7 +39,10 @@ public class BallMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Respawn"))
-            PoolManager.Instance.AddToPool(ID, gameObject);
+        {
+            Deactivate();
+            EventManager.InvokeLifeLost();
+        }
     }
 
     void Bounce(Vector3 normal)
@@ -54,8 +57,15 @@ public class BallMovement : MonoBehaviour
     public void Shoot(Vector3 direction)
     {
         rb.velocity = direction * speed;
-        Invoke(nameof(Active), 0.2f);
+        Invoke(nameof(Activate), 0.2f);
     }
 
-    void Active() => gameObject.layer = BallLayer;
+    void Activate() => gameObject.layer = BallLayer;
+
+    void Deactivate()
+    {
+        PoolManager.Instance.AddToPool(ID, gameObject);
+        gameObject.layer = IgnorePhysicsLayer;
+        rb.velocity = Vector3.zero;
+    }
 }
