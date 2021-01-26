@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
@@ -6,12 +7,13 @@ public class BallMovement : MonoBehaviour
     private const int BallLayer = 9;
     private const int IgnorePhysicsLayer = 8;
     private static int ballCount = 0;
+    private static bool isOnFire;
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 7;
-    Vector3 lastVelocity;
-    Transform myTransform;
-    PoolID ID => PoolID.Ball;
+    private Vector3 lastVelocity;
+    private Transform myTransform;
+    private PoolID ID => PoolID.Ball;
 
     void Start()
     {
@@ -24,11 +26,13 @@ public class BallMovement : MonoBehaviour
     private void OnEnable()
     {
         EventManager.EDoubleBalls += SpawnBalls;
+        EventManager.EFireBalls += ActivateFireBalls;
     }
 
     private void OnDisable()
     {
         EventManager.EDoubleBalls -= SpawnBalls;
+        EventManager.EFireBalls -= ActivateFireBalls;
     }
 
     private void LateUpdate() => lastVelocity = rb.velocity;
@@ -37,6 +41,13 @@ public class BallMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
             rb.velocity = (myTransform.position - collision.transform.position).normalized * speed;
+        else if (collision.gameObject.CompareTag("Brick"))
+        {
+            if (!isOnFire)
+                Bounce(collision.GetContact(0).normal);
+            else
+                rb.velocity = lastVelocity;
+        }
         else
             Bounce(collision.GetContact(0).normal);
     }
@@ -90,5 +101,22 @@ public class BallMovement : MonoBehaviour
             ball.layer = BallLayer;
             ball.GetComponent<Rigidbody>().velocity = Quaternion.Euler(Vector3.forward * Random.Range(-45, 45f)) * rb.velocity;
         }
+    }
+
+    void ActivateFireBalls(float duration)
+    {
+        if (!isOnFire)
+        {
+            Debug.Log("Activating on fire");
+            isOnFire = true;
+            StartCoroutine(DeactivateFireBalls(duration));
+        }
+    }
+
+    IEnumerator DeactivateFireBalls(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isOnFire = false;
+        Debug.Log("Deactivating on fire");
     }
 }

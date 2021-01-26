@@ -25,4 +25,8 @@ public class EventManager
     public delegate void DoubleBalls();
     public static event DoubleBalls EDoubleBalls;
     public static void InvokeDoubleBalls() => EDoubleBalls?.Invoke();
+
+    public delegate void FireBalls(float duration);
+    public static event FireBalls EFireBalls;
+    public static void InvokeFireBalls(float duration) => EFireBalls?.Invoke(duration);
 }
