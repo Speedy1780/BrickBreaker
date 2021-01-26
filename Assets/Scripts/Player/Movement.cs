@@ -18,11 +18,13 @@ public abstract class Movement : MonoBehaviour
     private void OnEnable()
     {
         EventManager.EDoubleSize += ActivateDoubleSize;
+        EventManager.EGameEnded += DisableMovement;
     }
 
     private void OnDisable()
     {
         EventManager.EDoubleSize -= ActivateDoubleSize;
+        EventManager.EGameEnded -= DisableMovement;
     }
 
     private void ActivateDoubleSize(float duration)
@@ -38,6 +40,8 @@ public abstract class Movement : MonoBehaviour
         if (Input.GetMouseButton(0))
             MovePlayer();
     }
+
+    void DisableMovement() => enabled = false;
 
     protected abstract void MovePlayer();
 

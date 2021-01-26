@@ -11,11 +11,13 @@ public class LaserController : MonoBehaviour
 
     private void OnEnable()
     {
-        if (rb == null)
-            rb = GetComponent<Rigidbody>();
+        InitializeLaser();
+        EventManager.EGameEnded += DestroyLaser;
+    }
 
-        rb.velocity = Vector3.up * speed;
-        Invoke(nameof(Activate), 0.2f);
+    private void OnDisable()
+    {
+        EventManager.EGameEnded -= DestroyLaser;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -25,5 +27,16 @@ public class LaserController : MonoBehaviour
         gameObject.layer = IgnorePhysics;
     }
 
+    void InitializeLaser()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        rb.velocity = Vector3.up * speed;
+        Invoke(nameof(Activate), 0.2f);
+    }
+
     void Activate() => gameObject.layer = LaserLayer;
+
+    void DestroyLaser() => PoolManager.Instance.AddToPool(ID, gameObject);
 }

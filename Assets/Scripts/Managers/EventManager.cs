@@ -33,4 +33,8 @@ public class EventManager
     public delegate void Laser(float duration);
     public static event Laser ELaser;
     public static void InvokeLaser(float duration) => ELaser?.Invoke(duration);
+
+    public delegate void GameEnded();
+    public static event GameEnded EGameEnded;
+    public static void InvokeGameEnded() => EGameEnded?.Invoke();
 }

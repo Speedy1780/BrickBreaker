@@ -8,11 +8,13 @@ public abstract class PowerUp : MonoBehaviour
     private void OnEnable()
     {
         EventManager.ELifeLost += DestroyPowerUp;
+        EventManager.EGameEnded += DestroyPowerUp;
     }
 
     private void OnDisable()
     {
         EventManager.ELifeLost -= DestroyPowerUp;
+        EventManager.EGameEnded -= DestroyPowerUp;
     }
 
     private void DestroyPowerUp()

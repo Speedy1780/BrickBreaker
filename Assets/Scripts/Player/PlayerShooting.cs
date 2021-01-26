@@ -37,11 +37,15 @@ public class PlayerShooting : MonoBehaviour
     private void OnEnable()
     {
         EventManager.ELaser += ActivateLasers;
+        EventManager.EGameEnded += DeactivateLasers;
     }
+
+
 
     private void OnDisable()
     {
         EventManager.ELaser -= ActivateLasers;
+        EventManager.EGameEnded -= DeactivateLasers;
     }
 
     public void StartShoot() => StartCoroutine(Shoot());
@@ -83,10 +87,12 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    private void DeactivateLasers() => lasersActivated = false;
+
     IEnumerator ShootLasers(float duration)
     {
         float startTime = Time.time;
-        while (Time.time < startTime + duration)
+        while (lasersActivated && Time.time < startTime + duration)
         {
             foreach (Transform laser in lasers)
             {

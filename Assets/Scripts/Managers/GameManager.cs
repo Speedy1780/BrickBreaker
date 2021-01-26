@@ -5,7 +5,6 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private int numberOfLifes = 2;
     [SerializeField] private PlayerShooting player;
-    [SerializeField] private Transform brickParents;
     [SerializeField] private float timeTransitionSpeed;
 
     private float slowMotionDuration;
@@ -13,21 +12,25 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EventManager.ELifeLost += LifeLost;
+        EventManager.EGameEnded += GameEnded;
         EventManager.ESlowTime += ActivateSlowMotion;
     }
-
-
 
     private void OnDisable()
     {
         EventManager.ELifeLost -= LifeLost;
+        EventManager.EGameEnded -= GameEnded;
         EventManager.ESlowTime -= ActivateSlowMotion;
     }
 
     private void Start()
     {
         player.StartShoot();
-        StartCoroutine(WaitForEndGame());
+    }
+
+    private void GameEnded()
+    {
+        Debug.Log("Game Ended");
     }
 
     private void LifeLost()
@@ -69,11 +72,5 @@ public class GameManager : Singleton<GameManager>
             Time.timeScale = Mathf.MoveTowards(Time.timeScale, target, timeTransitionSpeed * Time.unscaledDeltaTime);
             yield return null;
         }
-    }
-
-    IEnumerator WaitForEndGame()
-    {
-        yield return new WaitUntil(() => brickParents.childCount == 0);
-        Debug.Log("Game won");
     }
 }
