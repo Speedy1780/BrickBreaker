@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PowerUpManager : Singleton<PowerUpManager>
 {
@@ -8,12 +6,12 @@ public class PowerUpManager : Singleton<PowerUpManager>
 
     private void OnEnable()
     {
-        EventManager.spawnPowerUp += SpawnPowerUp;
+        EventManager.ESpawnPowerUp += SpawnPowerUp;
     }
 
     private void OnDisable()
     {
-        EventManager.spawnPowerUp -= SpawnPowerUp;
+        EventManager.ESpawnPowerUp -= SpawnPowerUp;
     }
 
     private void SpawnPowerUp(Vector3 spawnPosition)

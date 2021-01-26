@@ -9,12 +9,12 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        EventManager.lifeLost += LifeLost;
+        EventManager.ELifeLost += LifeLost;
     }
 
     private void OnDisable()
     {
-        EventManager.lifeLost -= LifeLost;
+        EventManager.ELifeLost -= LifeLost;
     }
 
     private void Start()

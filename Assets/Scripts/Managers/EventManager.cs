@@ -3,14 +3,18 @@
 public class EventManager
 {
     public delegate void AddScore(int points);
-    public static event AddScore addScore;
-    public static void InvokeAddScore(int points) => addScore?.Invoke(points);
+    public static event AddScore EAddScore;
+    public static void InvokeAddScore(int points) => EAddScore?.Invoke(points);
 
     public delegate void LifeLost();
-    public static event LifeLost lifeLost;
-    public static void InvokeLifeLost() => lifeLost?.Invoke();
+    public static event LifeLost ELifeLost;
+    public static void InvokeLifeLost() => ELifeLost?.Invoke();
 
     public delegate void SpawnPowerUp(Vector3 spawnPosition);
-    public static event SpawnPowerUp spawnPowerUp;
-    public static void InvokeSpawnPower(Vector3 spawnPosition) => spawnPowerUp?.Invoke(spawnPosition);
+    public static event SpawnPowerUp ESpawnPowerUp;
+    public static void InvokeSpawnPower(Vector3 spawnPosition) => ESpawnPowerUp?.Invoke(spawnPosition);
+
+    public delegate void DoubleSize(float duration);
+    public static event DoubleSize EDoubleSize;
+    public static void InvokeDoubleSize(float duration) => EDoubleSize?.Invoke(duration);
 }
