@@ -8,6 +8,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float speed = 4;
     Vector3 lastVelocity;
     Transform myTransform;
+    PoolID ID => PoolID.Ball;
 
     void Start()
     {
@@ -31,8 +32,14 @@ public class BallMovement : MonoBehaviour
 
 
             if (collision.gameObject.CompareTag("Brick"))
-                Destroy(collision.gameObject);
+                PoolManager.Instance.AddToPool(PoolID.Brick, collision.gameObject);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Respawn"))
+            PoolManager.Instance.AddToPool(ID, gameObject);
     }
 
     void Bounce(Vector3 normal)
@@ -47,12 +54,8 @@ public class BallMovement : MonoBehaviour
     public void Shoot(Vector3 direction)
     {
         rb.velocity = direction * speed;
-        Invoke("Active", 0.2f);
+        Invoke(nameof(Active), 0.2f);
     }
 
-    void Active()
-    {
-        gameObject.layer = BallLayer;
-
-    }
+    void Active() => gameObject.layer = BallLayer;
 }
