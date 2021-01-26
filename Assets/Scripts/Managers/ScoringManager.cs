@@ -11,6 +11,16 @@ public class ScoringManager : Singleton<ScoringManager>
         score = 0;
     }
 
+    private void OnEnable()
+    {
+        EventManager.addScore += AddScore;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.addScore -= AddScore;
+    }
+
     void AddScore(int points)
     {
         score += points;
