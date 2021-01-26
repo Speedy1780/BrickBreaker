@@ -35,7 +35,13 @@ public class BallMovement : MonoBehaviour
         EventManager.EFireBalls -= ActivateFireBalls;
     }
 
-    private void LateUpdate() => lastVelocity = rb.velocity;
+    private void LateUpdate()
+    {
+        if (rb.velocity.magnitude < speed)
+            rb.velocity = rb.velocity.normalized * speed;
+
+        lastVelocity = rb.velocity;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
