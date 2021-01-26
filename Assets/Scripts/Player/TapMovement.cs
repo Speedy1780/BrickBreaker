@@ -2,8 +2,8 @@
 
 public class TapMovement : Movement
 {
-    [SerializeField] private float sensitivity;
-    [SerializeField] private float maxHorizontal;
+    [SerializeField] private float sensitivity = 8;
+    [SerializeField] private float maxHorizontal = 8;
     private float halfWidth;
 
     protected override void Start()

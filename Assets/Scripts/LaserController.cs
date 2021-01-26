@@ -6,7 +6,7 @@ public class LaserController : MonoBehaviour
     private const int LaserLayer = 11;
 
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 5;
     private PoolID ID => PoolID.Laser;
 
     private void OnEnable()
