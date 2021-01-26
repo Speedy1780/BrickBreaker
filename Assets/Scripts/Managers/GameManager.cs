@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private int numberOfLifes = 2;
     [SerializeField] private PlayerShooting player;
+    [SerializeField] private Transform brickParents;
 
     private void OnEnable()
     {
@@ -18,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         player.StartShoot();
+        StartCoroutine(EndGame());
     }
 
     private void LifeLost()
@@ -28,5 +31,11 @@ public class GameManager : Singleton<GameManager>
             Debug.Log("Game Over");
         else
             player.StartShoot();
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitUntil(() => brickParents.childCount == 0);
+        Debug.Log("Game won");
     }
 }

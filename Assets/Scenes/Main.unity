@@ -2783,6 +2783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfLifes: 2
   player: {fileID: 796760330}
+  brickParents: {fileID: 2043353350}
 --- !u!1 &1800705401
 GameObject:
   m_ObjectHideFlags: 0
