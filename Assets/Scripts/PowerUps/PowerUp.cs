@@ -1,11 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class PowerUp : MonoBehaviour
 {
     private PoolID ID => PoolID.PowerUp;
     protected abstract void ActivatePowerUp();
+
+    private void OnEnable()
+    {
+        EventManager.ELifeLost += DestroyPowerUp;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.ELifeLost -= DestroyPowerUp;
+    }
+
+    private void DestroyPowerUp()
+    {
+        PoolManager.Instance.AddToPool(ID, gameObject);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
