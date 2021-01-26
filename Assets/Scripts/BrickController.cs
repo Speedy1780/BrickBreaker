@@ -7,10 +7,7 @@ public class BrickController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject power = PoolManager.Instance.GetPooledObject(PoolID.PowerUp);
-        power.transform.position = transform.position;
-        power.GetComponent<Rigidbody>().velocity = Vector3.down * 5;
-
+        EventManager.InvokeSpawnPower(transform.position);
         EventManager.InvokeAddScore(score);
         PoolManager.Instance.AddToPool(ID, gameObject);
     }
