@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
-    [SerializeField] private float scaleSpeed;
+    [SerializeField] private float scaleSpeed = 2;
     protected Transform myTransform;
     private Vector3 initialScale;
     private float scaleDuration;

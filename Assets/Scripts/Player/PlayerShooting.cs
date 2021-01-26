@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private Movement movement;
     [SerializeField] private LineRenderer line;
     [SerializeField] private Transform laserParent;
-    [SerializeField] private float laserDelay;
+    [SerializeField] private float laserDelay = 0.25f;
 
     private Transform myTransform;
     private List<Transform> lasers;

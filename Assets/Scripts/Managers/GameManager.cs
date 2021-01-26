@@ -5,7 +5,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private int numberOfLifes = 2;
     [SerializeField] private PlayerShooting player;
-    [SerializeField] private float timeTransitionSpeed;
+    [SerializeField] private float timeTransitionSpeed = 1;
 
     private float slowMotionDuration;
 
@@ -40,7 +40,7 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.SetLife(numberOfLifes);
 
         if (numberOfLifes < 0)
-            Debug.Log("Game Over");
+            EventManager.InvokeGameEnded();
         else
             player.StartShoot();
     }
