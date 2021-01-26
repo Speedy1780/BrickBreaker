@@ -10,7 +10,7 @@ public class PlayerShooting : MonoBehaviour
 
     private Transform myTransform;
 
-    void Start()
+    void Awake()
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -18,8 +18,9 @@ public class PlayerShooting : MonoBehaviour
             movement = GetComponent<Movement>();
 
         myTransform = transform;
-        StartCoroutine(Shoot());
     }
+
+    public void StartShoot() => StartCoroutine(Shoot());
 
     IEnumerator Shoot()
     {
