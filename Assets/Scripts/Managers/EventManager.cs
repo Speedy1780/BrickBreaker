@@ -29,4 +29,8 @@ public class EventManager
     public delegate void FireBalls(float duration);
     public static event FireBalls EFireBalls;
     public static void InvokeFireBalls(float duration) => EFireBalls?.Invoke(duration);
+
+    public delegate void Laser(float duration);
+    public static event Laser ELaser;
+    public static void InvokeLaser(float duration) => ELaser?.Invoke(duration);
 }

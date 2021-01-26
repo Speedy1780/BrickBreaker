@@ -2,5 +2,6 @@
 {
     Ball,
     Brick,
-    PowerUp
+    PowerUp,
+    Laser
 }

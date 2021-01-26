@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ac23a5f54e67674e8ea797b721125e9, type: 3}
-  m_Name: PowerUp
+  m_Name: Laser
   m_EditorClassIdentifier: 
   CategoryItems:
-  - {fileID: 3352033284236749472, guid: ac017a26558af5f4ebe2832878b89821, type: 3}
+  - {fileID: 8128148452675524331, guid: 9099cb52afac6314cb28d9fee063feb1, type: 3}

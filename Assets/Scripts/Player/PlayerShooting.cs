@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
@@ -7,9 +8,15 @@ public class PlayerShooting : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Movement movement;
     [SerializeField] private LineRenderer line;
+    [SerializeField] private Transform laserParent;
+    [SerializeField] private float laserDelay;
 
     private Transform myTransform;
+    private List<Transform> lasers;
     private Vector3[] defaultPoints;
+    private bool lasersActivated;
+
+    private PoolID Lasers => PoolID.Laser;
 
     void Awake()
     {
@@ -18,8 +25,23 @@ public class PlayerShooting : MonoBehaviour
         if (movement == null)
             movement = GetComponent<Movement>();
 
+        lasers = new List<Transform>();
+        foreach (Transform child in laserParent)
+            lasers.Add(child);
+
+        lasersActivated = false;
         myTransform = transform;
         defaultPoints = new Vector3[] { Vector3.zero, Vector3.zero };
+    }
+
+    private void OnEnable()
+    {
+        EventManager.ELaser += ActivateLasers;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.ELaser -= ActivateLasers;
     }
 
     public void StartShoot() => StartCoroutine(Shoot());
@@ -50,5 +72,30 @@ public class PlayerShooting : MonoBehaviour
         line.enabled = false;
         direction.z = 0;
         ball.Shoot(direction.normalized);
+    }
+
+    void ActivateLasers(float duration)
+    {
+        if (!lasersActivated)
+        {
+            lasersActivated = true;
+            StartCoroutine(ShootLasers(duration));
+        }
+    }
+
+    IEnumerator ShootLasers(float duration)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + duration)
+        {
+            foreach (Transform laser in lasers)
+            {
+                GameObject l = PoolManager.Instance.GetPooledObject(Lasers);
+                l.transform.SetPositionAndRotation(laser.position, Quaternion.identity);
+            }
+
+            yield return new WaitForSeconds(laserDelay);
+        }
+        lasersActivated = false;
     }
 }
