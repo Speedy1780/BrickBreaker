@@ -40,6 +40,7 @@ public class PlayerShooting : MonoBehaviour
         while (Input.GetMouseButton(0))
         {
             tapPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+            tapPosition.z = 0;
             direction = tapPosition - spawnPoint.position;
             line.SetPosition(1, myTransform.InverseTransformPoint(tapPosition));
             yield return null;
@@ -47,6 +48,7 @@ public class PlayerShooting : MonoBehaviour
 
         movement.enabled = true;
         line.enabled = false;
+        direction.z = 0;
         ball.Shoot(direction.normalized);
     }
 }
