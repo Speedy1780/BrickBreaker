@@ -131,14 +131,15 @@ public class BallMovement : MonoBehaviour
         {
             Debug.Log("Activating on fire");
             isOnFire = true;
-            StartCoroutine(DeactivateFireBalls(duration));
+            DeactivateFireBalls(duration);
         }
     }
 
-    IEnumerator DeactivateFireBalls(float duration)
+    async void DeactivateFireBalls(float duration)
     {
-        yield return new WaitForSeconds(duration);
-        isOnFire = false;
+        await System.Threading.Tasks.Task.Delay((int)(duration * 1000));
         Debug.Log("Deactivating on fire");
+        isOnFire = false;
+
     }
 }
