@@ -5,9 +5,18 @@ public abstract class Movement : MonoBehaviour
 {
     [SerializeField] private float scaleSpeed = 2;
     protected Transform myTransform;
+    protected int movementType;
     private Vector3 initialScale;
     private float scaleDuration;
 
+    private void Awake()
+    {
+        movementType = PlayerPrefs.GetInt(PlayerPrefsKeys.MovementType, 1);
+        enabled = false;
+
+        if (movementType != MovementType())
+            DestroyImmediate(this);
+    }
     protected virtual void Start()
     {
         myTransform = transform;
@@ -44,6 +53,7 @@ public abstract class Movement : MonoBehaviour
     void DisableMovement() => enabled = false;
 
     protected abstract void MovePlayer();
+    protected abstract int MovementType();
 
     IEnumerator DoubleSize()
     {

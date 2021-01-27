@@ -1052,6 +1052,7 @@ GameObject:
   - component: {fileID: 796760324}
   - component: {fileID: 796760329}
   - component: {fileID: 796760330}
+  - component: {fileID: 796760328}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1136,6 +1137,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &796760328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796760323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 352595e254dafbe4189564dc8a914073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSpeed: 2
+  sensitivity: 8
+  maxHorizontal: 8
 --- !u!114 &796760329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796760323}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ef94fbc3d08c5640a8676407dc38ec3, type: 3}
   m_Name: 
@@ -1188,7 +1204,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
   spawnPoint: {fileID: 845446460}
-  movement: {fileID: 796760329}
   line: {fileID: 1079818386}
   laserParent: {fileID: 934530894}
   laserDelay: 0.25

@@ -6,11 +6,11 @@ public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Movement movement;
     [SerializeField] private LineRenderer line;
     [SerializeField] private Transform laserParent;
     [SerializeField] private float laserDelay = 0.25f;
 
+    private Movement movement;
     private Transform myTransform;
     private List<Transform> lasers;
     private Vector3[] defaultPoints;
@@ -22,8 +22,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (mainCamera == null)
             mainCamera = Camera.main;
-        if (movement == null)
-            movement = GetComponent<Movement>();
+
 
         lasers = new List<Transform>();
         foreach (Transform child in laserParent)
@@ -33,6 +32,8 @@ public class PlayerShooting : MonoBehaviour
         myTransform = transform;
         defaultPoints = new Vector3[] { Vector3.zero, Vector3.zero };
     }
+
+    private void Start() => movement = GetComponent<Movement>();
 
     private void OnEnable()
     {
