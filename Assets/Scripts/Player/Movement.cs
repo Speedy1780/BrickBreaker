@@ -12,7 +12,7 @@ public abstract class Movement : MonoBehaviour
     private void Awake()
     {
         //Get movement type and disable movement
-        movementType = PlayerPrefs.GetInt(PlayerPrefsKeys.MovementType, 1);
+        movementType = PlayerPrefs.GetInt(PlayerPrefsKeys.MovementType, 0);
         enabled = false;
 
         if (movementType != MovementType()) //Destroy if movement type is different
