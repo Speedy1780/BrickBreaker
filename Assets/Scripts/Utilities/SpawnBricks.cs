@@ -21,6 +21,7 @@ public class SpawnBricks : MonoBehaviour
             brick.transform.SetParent(transform);
             brick.name = $"Brick_{brickIndex}";
             brick.transform.SetParent(transform);
+
             row = Mathf.FloorToInt(brickIndex / maxColumns);
             column = brickIndex % maxColumns;
             brick.transform.position = startPosition + Vector3.right * column + Vector3.down * row;

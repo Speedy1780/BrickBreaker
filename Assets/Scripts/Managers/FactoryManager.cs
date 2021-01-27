@@ -2,16 +2,17 @@
 
 public class FactoryManager : Singleton<FactoryManager>
 {
+    public FactoryCatalog Catalog;
+
     private void Start()
     {
+        //Add all power up instances to pool prevent spawning same power up later
         foreach (GameObject powerUp in Catalog[PoolID.PowerUp].CategoryItems)
         {
             GameObject p = Instantiate(powerUp);
             PoolManager.Instance.AddToPool(PoolID.PowerUp, p);
         }
     }
-
-    public FactoryCatalog Catalog;
 
     public GameObject GetItem(PoolID id)
     {

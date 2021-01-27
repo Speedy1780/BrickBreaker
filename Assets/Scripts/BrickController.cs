@@ -15,24 +15,21 @@ public class BrickController : MonoBehaviour
         addedToPool = false;
     }
 
-    private void OnDisable()
-    {
-        brickCount -= 1;
-    }
+    private void OnDisable() => brickCount -= 1;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!addedToPool)
+        if (!addedToPool) //Prevent being added twice to pool in case two collisions occured at the same frame
         {
             addedToPool = true;
 
-            if (Random.Range(0, 100) < powerUpChance)
+            if (Random.Range(0, 100) < powerUpChance) //Randomly spawn power up
                 EventManager.InvokeSpawnPower(transform.position);
 
             EventManager.InvokeAddScore(score);
             PoolManager.Instance.AddToPool(ID, gameObject);
 
-            if (brickCount <= 0)
+            if (brickCount <= 0) //Check if all bricks were destroyed
                 EventManager.InvokeGameEnded();
         }
     }

@@ -50,6 +50,7 @@ public class PoolManager : Singleton<PoolManager>
         //If id exists in dictionary enqueue object to queue
         if (pooledObjects.ContainsKey(id))
         {
+            //Prevents from adding if already in queue
             if (!pooledObjects[id].Contains(poolObject))
                 pooledObjects[id].Enqueue(poolObject);
         }

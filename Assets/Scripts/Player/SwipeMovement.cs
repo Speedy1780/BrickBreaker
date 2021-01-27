@@ -21,7 +21,7 @@ public class SwipeMovement : Movement
         myTransform.position = playerPosition;
     }
 
-    //Returns the x position of the player
+    //Gets the position in percentage on the screen where the player tapped evaluate it on the curve to get x world coordinate
     float GetHorizontalPosition() => horizontalLimit.Evaluate(mainCamera.ScreenToViewportPoint(Input.mousePosition).x);
 
     protected override int MovementType() => 0;

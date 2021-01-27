@@ -17,10 +17,7 @@ public abstract class PowerUp : MonoBehaviour
         EventManager.EGameEnded -= DestroyPowerUp;
     }
 
-    private void DestroyPowerUp()
-    {
-        PoolManager.Instance.AddToPool(ID, gameObject);
-    }
+    private void DestroyPowerUp() => PoolManager.Instance.AddToPool(ID, gameObject);
 
     private void OnTriggerEnter(Collider other)
     {

@@ -11,10 +11,11 @@ public abstract class Movement : MonoBehaviour
 
     private void Awake()
     {
+        //Get movement type and disable movement
         movementType = PlayerPrefs.GetInt(PlayerPrefsKeys.MovementType, 1);
         enabled = false;
 
-        if (movementType != MovementType())
+        if (movementType != MovementType()) //Destroy if movement type is different
             DestroyImmediate(this);
     }
     protected virtual void Start()
@@ -38,10 +39,10 @@ public abstract class Movement : MonoBehaviour
 
     private void ActivateDoubleSize(float duration)
     {
-        if (scaleDuration <= 0)
+        if (scaleDuration <= 0) //Start couroutine if not active
             StartCoroutine(DoubleSize());
 
-        scaleDuration += duration;
+        scaleDuration += duration; //Set/extend scale duration
     }
 
     void Update()
@@ -60,7 +61,7 @@ public abstract class Movement : MonoBehaviour
         Vector3 doubleScale = initialScale;
         doubleScale.x *= 2;
 
-        yield return StartCoroutine(ScalePlayer(doubleScale));
+        yield return StartCoroutine(ScalePlayer(doubleScale)); //Scale up player
 
         while (scaleDuration > 0)
         {
@@ -68,8 +69,9 @@ public abstract class Movement : MonoBehaviour
             yield return null;
         }
 
-        scaleDuration = 0;
-        yield return StartCoroutine(ScalePlayer(initialScale));
+        scaleDuration = 0; //Reset to 0 to prevent shorter duration for next time
+
+        yield return StartCoroutine(ScalePlayer(initialScale)); //Scale down player
     }
 
     IEnumerator ScalePlayer(Vector3 target)

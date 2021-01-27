@@ -2,20 +2,20 @@
 
 public class BallMovement : MonoBehaviour
 {
-    private const float MinAngle = 5;
-    private const int MaxBalls = 3;
-    private const int BallLayer = 9;
+    private const float MinAngle = 5; //Minimum angle with horizontal
+    private const int MaxBalls = 3; //Maximum balls concurently on the screen
+    private const int BallLayer = 9; //Ignore collisions between balls
     private const int IgnorePhysicsLayer = 8;
-    private static int ballCount = 0;
+    private static int ballCount = 0; //Current balls on screen
     private static bool isOnFire;
 
     [SerializeField] private Rigidbody rb;
     [SerializeField] private float speed = 7;
     private Vector3 lastVelocity;
     private Transform myTransform;
+    private readonly float minSin = Mathf.Sin(MinAngle * Mathf.Deg2Rad);
 
     private PoolID ID => PoolID.Ball;
-    private readonly float minSin = Mathf.Sin(MinAngle * Mathf.Deg2Rad);
 
     void Start()
     {
@@ -49,16 +49,16 @@ public class BallMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")) //Send the ball back depending on the hit spot
             rb.velocity = (myTransform.position - collision.transform.position).normalized * speed;
         else if (collision.gameObject.CompareTag("Brick"))
         {
-            if (!isOnFire)
+            if (!isOnFire) //Bounce the ball off the brick is power up is inactive
                 Bounce(collision.GetContact(0).normal);
-            else
+            else //Go through brick
                 rb.velocity = lastVelocity;
         }
-        else
+        else //Hit a boundary
             Bounce(collision.GetContact(0).normal);
     }
 
@@ -75,19 +75,17 @@ public class BallMovement : MonoBehaviour
 
     void Bounce(Vector3 normal)
     {
-        rb.velocity = Vector3.Reflect(lastVelocity, normal).normalized * speed;
+        rb.velocity = Vector3.Reflect(lastVelocity, normal).normalized * speed; //Reflect based on collision point normal
         CheckAngle();
-
-        //Prevent ball being stuck in place
-        if (rb.velocity.magnitude == 0)
+        
+        if (rb.velocity.magnitude == 0) //Prevent ball being stuck in place
             rb.velocity = Vector3.up * speed;
     }
 
     public void Shoot(Vector3 direction)
     {
         rb.velocity = direction * speed;
-        CheckAngle();
-        Invoke(nameof(Activate), 0.2f);
+        Invoke(nameof(Activate), 0.2f); //Activate collisions after 0.2 seconds
     }
 
     void Activate()
@@ -97,30 +95,30 @@ public class BallMovement : MonoBehaviour
     }
 
     void Deactivate()
-    {
+    { 
         ballCount -= 1;
-        PoolManager.Instance.AddToPool(ID, gameObject);
-        gameObject.layer = IgnorePhysicsLayer;
+        gameObject.layer = IgnorePhysicsLayer; //Prevent collision with player while shooting
         rb.velocity = Vector3.zero;
+        PoolManager.Instance.AddToPool(ID, gameObject);
     }
 
     void CheckAngle()
     {
+        //Get angle with horizontal and cos and sin
         float angle = Vector3.SignedAngle(Vector3.right, rb.velocity, Vector3.forward) * Mathf.Deg2Rad;
         float sin = Mathf.Sin(angle);
         float cos = Mathf.Cos(angle);
 
-        if (Mathf.Abs(sin) < Mathf.Abs(minSin))
+        if (Mathf.Abs(sin) < Mathf.Abs(minSin)) //If true ball is barely moving vertically
         {
-            if (Mathf.Sign(sin) == Mathf.Sign(cos))
+            if (Mathf.Sign(sin) == Mathf.Sign(cos)) //1 & 3 quadrants rotate CCW
                 rb.velocity = Quaternion.Euler(Vector3.forward * MinAngle) * rb.velocity;
-            else
+            else //2 & 4 quadrants rotate counter CW
                 rb.velocity = Quaternion.Euler(Vector3.forward * -MinAngle) * rb.velocity;
         }
-
     }
 
-    void SpawnBalls()
+    void SpawnBalls() //Spawn additional balls on screen
     {
         for (; ballCount < MaxBalls; ballCount++)
         {
@@ -133,19 +131,16 @@ public class BallMovement : MonoBehaviour
 
     void ActivateFireBalls(float duration)
     {
-        if (!isOnFire)
+        if (!isOnFire) //Activate fireballs if deactivated
         {
-            Debug.Log("Activating on fire");
             isOnFire = true;
             DeactivateFireBalls(duration);
         }
     }
 
-    async void DeactivateFireBalls(float duration)
+    async void DeactivateFireBalls(float duration) //Will deactivate even if ball is inactive
     {
         await System.Threading.Tasks.Task.Delay((int)(duration * 1000));
-        Debug.Log("Deactivating on fire");
         isOnFire = false;
-
     }
 }

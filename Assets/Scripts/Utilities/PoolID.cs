@@ -1,4 +1,4 @@
-﻿public enum PoolID
+﻿public enum PoolID //Used for object pooling
 {
     Ball,
     Brick,

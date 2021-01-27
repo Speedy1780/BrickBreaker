@@ -15,6 +15,7 @@ public class TapMovement : Movement
 
     protected override void MovePlayer()
     {
+        //Move left/right if player taps left/right
         if (Input.mousePosition.x < halfWidth)
             myTransform.Translate(Vector3.left * sensitivity * Time.unscaledDeltaTime);
         else
@@ -23,7 +24,7 @@ public class TapMovement : Movement
         LimitHorizontal();
     }
 
-    void LimitHorizontal()
+    void LimitHorizontal() //Prevents player from going out of bounds
     {
         float xPosition = myTransform.position.x;
         if (Mathf.Abs(xPosition) > maxHorizontal)
