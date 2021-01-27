@@ -20,11 +20,6 @@ public class BrickController : MonoBehaviour
         brickCount -= 1;
     }
 
-    private void Start()
-    {
-        UIManager.Instance.SetScore(brickCount);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (!addedToPool)
@@ -36,7 +31,6 @@ public class BrickController : MonoBehaviour
 
             EventManager.InvokeAddScore(score);
             PoolManager.Instance.AddToPool(ID, gameObject);
-            UIManager.Instance.SetScore(brickCount);
 
             if (brickCount <= 0)
                 EventManager.InvokeGameEnded();

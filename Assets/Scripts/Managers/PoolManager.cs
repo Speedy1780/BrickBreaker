@@ -50,7 +50,8 @@ public class PoolManager : Singleton<PoolManager>
         //If id exists in dictionary enqueue object to queue
         if (pooledObjects.ContainsKey(id))
         {
-            pooledObjects[id].Enqueue(poolObject);
+            if (!pooledObjects[id].Contains(poolObject))
+                pooledObjects[id].Enqueue(poolObject);
         }
 
         //Create new dictionary entry with object as it's first element
