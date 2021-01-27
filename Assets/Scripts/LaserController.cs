@@ -24,7 +24,6 @@ public class LaserController : MonoBehaviour
     {
         PoolManager.Instance.AddToPool(ID, gameObject);
         rb.velocity = Vector3.zero;
-        gameObject.layer = IgnorePhysics;
     }
 
     void InitializeLaser()
@@ -32,6 +31,7 @@ public class LaserController : MonoBehaviour
         if (rb == null)
             rb = GetComponent<Rigidbody>();
 
+        gameObject.layer = IgnorePhysics;
         rb.velocity = Vector3.up * speed;
         Invoke(nameof(Activate), 0.2f);
     }

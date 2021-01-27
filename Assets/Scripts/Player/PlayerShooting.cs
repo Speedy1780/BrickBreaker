@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
+    private const int MaxAngle = 85;
+
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private LineRenderer line;
@@ -68,8 +70,13 @@ public class PlayerShooting : MonoBehaviour
         {
             tapPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             tapPosition.z = 0;
-            direction = tapPosition - spawnPoint.position;
-            line.SetPosition(1, myTransform.InverseTransformPoint(tapPosition));
+
+            if (Vector3.Angle(Vector3.up, tapPosition - spawnPoint.position) < MaxAngle)
+            {
+                direction = tapPosition - spawnPoint.position;
+                line.SetPosition(1, myTransform.InverseTransformPoint(tapPosition));
+            }
+
             yield return null;
         }
 
