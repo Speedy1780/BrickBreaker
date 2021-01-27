@@ -1048,7 +1048,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1061369584}
-        m_MethodName: ChaneSensitivity
+        m_MethodName: ChangeSensitivity
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
