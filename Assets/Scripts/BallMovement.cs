@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
@@ -14,7 +13,9 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float speed = 7;
     private Vector3 lastVelocity;
     private Transform myTransform;
+
     private PoolID ID => PoolID.Ball;
+    private readonly float minSin = Mathf.Sin(MinAngle * Mathf.Deg2Rad);
 
     void Start()
     {
@@ -85,6 +86,7 @@ public class BallMovement : MonoBehaviour
     public void Shoot(Vector3 direction)
     {
         rb.velocity = direction * speed;
+        CheckAngle();
         Invoke(nameof(Activate), 0.2f);
     }
 
@@ -104,14 +106,18 @@ public class BallMovement : MonoBehaviour
 
     void CheckAngle()
     {
-        //Get minimum angle between speed and horizontal
-        float rightAngle = Vector3.SignedAngle(Vector3.right, rb.velocity, Vector3.forward);
-        float leftAngle = Vector3.SignedAngle(Vector3.right, rb.velocity, Vector3.forward);
-        float minAngle = Mathf.Min(Mathf.Abs(leftAngle), Mathf.Abs(rightAngle));
+        float angle = Vector3.SignedAngle(Vector3.right, rb.velocity, Vector3.forward) * Mathf.Deg2Rad;
+        float sin = Mathf.Sin(angle);
+        float cos = Mathf.Cos(angle);
 
-        //If angle is less than min angle rotate it by min angle degrees to prevent the ball getting stuck with a horizontal velocity
-        if (minAngle < MinAngle)
-            rb.velocity = Quaternion.Euler(Vector3.forward * (MinAngle - minAngle) * Mathf.Sign(minAngle)) * rb.velocity;
+        if (Mathf.Abs(sin) < Mathf.Abs(minSin))
+        {
+            if (Mathf.Sign(sin) == Mathf.Sign(cos))
+                rb.velocity = Quaternion.Euler(Vector3.forward * MinAngle) * rb.velocity;
+            else
+                rb.velocity = Quaternion.Euler(Vector3.forward * -MinAngle) * rb.velocity;
+        }
+
     }
 
     void SpawnBalls()
