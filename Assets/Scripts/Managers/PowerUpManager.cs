@@ -4,15 +4,9 @@ public class PowerUpManager : Singleton<PowerUpManager>
 {
     [SerializeField] private float powerUpSpeed = 3.5f;
 
-    private void OnEnable()
-    {
-        EventManager.ESpawnPowerUp += SpawnPowerUp;
-    }
+    private void OnEnable() => EventManager.ESpawnPowerUp += SpawnPowerUp;
 
-    private void OnDisable()
-    {
-        EventManager.ESpawnPowerUp -= SpawnPowerUp;
-    }
+    private void OnDisable() => EventManager.ESpawnPowerUp -= SpawnPowerUp;
 
     private void SpawnPowerUp(Vector3 spawnPosition)
     {
