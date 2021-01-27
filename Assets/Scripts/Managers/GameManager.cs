@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int numberOfLifes = 2;
     [SerializeField] private PlayerShooting player;
     [SerializeField] private float timeTransitionSpeed = 1;
+    [SerializeField] private SpawnBricks brickSpawner;
 
     private float slowMotionDuration;
 
@@ -31,7 +32,26 @@ public class GameManager : Singleton<GameManager>
 
     private void GameEnded()
     {
-        UIManager.Instance.ShowEndMenu();
+        UIManager.Instance.ShowEndMenu(numberOfLifes < 0);
+    }
+
+    public void PlayAgain()
+    {
+        if (numberOfLifes >= 0)
+        {
+            brickSpawner.AddBricks();
+            numberOfLifes += 1;
+        }
+        else
+        {
+            numberOfLifes = 2;
+            ScoringManager.Instance.ResetScore();
+        }
+
+        brickSpawner.PlaceBricks();
+        player.StartShoot();
+        UIManager.Instance.SetLife(numberOfLifes);
+        UIManager.Instance.HideEndMenu();
     }
 
     private void LifeLost()

@@ -12,10 +12,12 @@ public class UIManager : Singleton<UIManager>
     public void SetScore(int score) => ScoreText.text = $"Score: {score}";
     public void SetLife(int lives) => LifeText.text = $"Life: {lives}";
 
-    public void ShowEndMenu()
+    public void ShowEndMenu(bool lost)
     {
         EndMenu.SetActive(true);
+        PlayText.text = lost ? "Replay" : "Next Level";
     }
 
+    public void HideEndMenu() => EndMenu.SetActive(false);
     public void ReturnToMainMenu() => SceneManager.LoadScene(0);
 }

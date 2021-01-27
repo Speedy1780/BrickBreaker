@@ -9,7 +9,7 @@ public class ScoringManager : Singleton<ScoringManager>
     void Start()
     {
         score = 0;
-        UIManager.Instance.SetScore(score);
+        //UIManager.Instance.SetScore(score);
     }
 
     private void OnEnable()
@@ -25,6 +25,12 @@ public class ScoringManager : Singleton<ScoringManager>
     void AddScore(int points)
     {
         score += points;
-        UIManager.Instance.SetScore(score);
+        //UIManager.Instance.SetScore(score);
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        //UIManager.Instance.SetScore(score);
     }
 }
