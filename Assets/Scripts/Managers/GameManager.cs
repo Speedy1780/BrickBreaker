@@ -31,7 +31,7 @@ public class GameManager : Singleton<GameManager>
 
     private void GameEnded()
     {
-        Debug.Log("Game Ended");
+        UIManager.Instance.ShowEndMenu();
     }
 
     private void LifeLost()
