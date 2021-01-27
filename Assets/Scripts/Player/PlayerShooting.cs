@@ -43,8 +43,6 @@ public class PlayerShooting : MonoBehaviour
         EventManager.EGameEnded += DeactivateLasers;
     }
 
-
-
     private void OnDisable()
     {
         EventManager.ELaser -= ActivateLasers;
@@ -55,14 +53,16 @@ public class PlayerShooting : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        //Stop movement and show targeting line
         movement.enabled = false;
         line.enabled = true;
         line.SetPositions(defaultPoints);
+
+        //Spawn ball and place it on player
         BallMovement ball = PoolManager.Instance.GetPooledObject(PoolID.Ball).GetComponent<BallMovement>();
         ball.transform.SetPositionAndRotation(spawnPoint.position, Quaternion.identity);
         yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        Debug.Log("Key down");
-        line.SetPosition(0, myTransform.InverseTransformPoint(spawnPoint.position));
+
         Vector3 direction = Vector3.up;
         Vector3 tapPosition;
 
@@ -71,7 +71,7 @@ public class PlayerShooting : MonoBehaviour
             tapPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             tapPosition.z = 0;
 
-            if (Vector3.Angle(Vector3.up, tapPosition - spawnPoint.position) < MaxAngle)
+            if (Vector3.Angle(Vector3.up, tapPosition - spawnPoint.position) < MaxAngle) //Prevents player from shooting ball too horizontally or downwards
             {
                 direction = tapPosition - spawnPoint.position;
                 line.SetPosition(1, myTransform.InverseTransformPoint(tapPosition));
@@ -80,15 +80,18 @@ public class PlayerShooting : MonoBehaviour
             yield return null;
         }
 
+        //Enables movement and hide targeting line
         movement.enabled = true;
         line.enabled = false;
+
+        //Shoot ball in xy direction
         direction.z = 0;
         ball.Shoot(direction.normalized);
     }
 
     void ActivateLasers(float duration)
     {
-        if (!lasersActivated)
+        if (!lasersActivated) //Activate lasers is deactive
         {
             lasersActivated = true;
             StartCoroutine(ShootLasers(duration));
@@ -100,7 +103,9 @@ public class PlayerShooting : MonoBehaviour
     IEnumerator ShootLasers(float duration)
     {
         float startTime = Time.time;
-        while (lasersActivated && Time.time < startTime + duration)
+        float deadline = startTime + duration;
+
+        while (lasersActivated && Time.time < deadline) //Keep running until deadline
         {
             foreach (Transform laser in lasers)
             {
@@ -110,6 +115,7 @@ public class PlayerShooting : MonoBehaviour
 
             yield return new WaitForSeconds(laserDelay);
         }
+
         lasersActivated = false;
     }
 }
