@@ -15,7 +15,7 @@ public class UIManager : Singleton<UIManager>
     public void ShowEndMenu(bool lost)
     {
         EndMenu.SetActive(true);
-        PlayText.text = lost ? "Replay" : "Next Level";
+        PlayText.text = lost ? "REPLAY" : "NEXT LEVEL";
     }
 
     public void HideEndMenu() => EndMenu.SetActive(false);

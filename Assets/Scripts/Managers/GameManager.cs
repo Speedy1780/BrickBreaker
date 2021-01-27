@@ -30,24 +30,22 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.SetLife(numberOfLifes);
     }
 
-    private void GameEnded()
-    {
-        UIManager.Instance.ShowEndMenu(numberOfLifes < 0);
-    }
+    private void GameEnded() => UIManager.Instance.ShowEndMenu(numberOfLifes < 0);
 
     public void PlayAgain()
     {
-        if (numberOfLifes >= 0)
+        if (numberOfLifes >= 0) //Player won
         {
             brickSpawner.AddBricks();
             numberOfLifes += 1;
         }
-        else
+        else //Player lost
         {
             numberOfLifes = 2;
             ScoringManager.Instance.ResetScore();
         }
 
+        //Start level
         brickSpawner.PlaceBricks();
         player.StartShoot();
         UIManager.Instance.SetLife(numberOfLifes);
@@ -59,23 +57,23 @@ public class GameManager : Singleton<GameManager>
         numberOfLifes -= 1;
         UIManager.Instance.SetLife(numberOfLifes);
 
-        if (numberOfLifes < 0)
+        if (numberOfLifes < 0) //Player lost
             EventManager.InvokeGameEnded();
-        else
+        else //Shoot next ball
             player.StartShoot();
     }
 
     private void ActivateSlowMotion(float duration, float factor)
     {
-        if (slowMotionDuration <= 0)
+        if (slowMotionDuration <= 0) //Start coroutine if not active
             StartCoroutine(SlowTime(factor));
 
-        slowMotionDuration += duration;
+        slowMotionDuration += duration; //Set/extend slow motion duration
     }
 
     IEnumerator SlowTime(float factor)
     {
-        yield return StartCoroutine(ScaleTime(factor));
+        yield return StartCoroutine(ScaleTime(factor)); //Slow down time
 
         while (slowMotionDuration > 0)
         {
@@ -83,8 +81,9 @@ public class GameManager : Singleton<GameManager>
             yield return null;
         }
 
-        slowMotionDuration = 0;
-        yield return StartCoroutine(ScaleTime(1));
+        slowMotionDuration = 0; //Reset to 0 to prevent shorter duration for next time
+
+        yield return StartCoroutine(ScaleTime(1)); //Reset time
     }
 
     IEnumerator ScaleTime(float target)
