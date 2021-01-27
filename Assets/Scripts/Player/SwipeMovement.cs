@@ -23,4 +23,6 @@ public class SwipeMovement : Movement
 
     //Returns the x position of the player
     float GetHorizontalPosition() => horizontalLimit.Evaluate(mainCamera.ScreenToViewportPoint(Input.mousePosition).x);
+
+    protected override int MovementType() => 0;
 }

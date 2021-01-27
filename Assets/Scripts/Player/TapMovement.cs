@@ -10,14 +10,15 @@ public class TapMovement : Movement
     {
         base.Start();
         halfWidth = Screen.width * 0.5f;
+        sensitivity = PlayerPrefs.GetFloat(PlayerPrefsKeys.TapSensitivity, sensitivity);
     }
 
     protected override void MovePlayer()
     {
         if (Input.mousePosition.x < halfWidth)
-            myTransform.Translate(Vector3.left * sensitivity * Time.deltaTime);
+            myTransform.Translate(Vector3.left * sensitivity * Time.unscaledDeltaTime);
         else
-            myTransform.Translate(Vector3.right * sensitivity * Time.deltaTime);
+            myTransform.Translate(Vector3.right * sensitivity * Time.unscaledDeltaTime);
 
         LimitHorizontal();
     }
@@ -32,4 +33,6 @@ public class TapMovement : Movement
             myTransform.position = position;
         }
     }
+
+    protected override int MovementType() => 1;
 }

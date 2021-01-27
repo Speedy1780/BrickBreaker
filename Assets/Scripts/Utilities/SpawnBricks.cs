@@ -12,7 +12,7 @@ public class SpawnBricks : MonoBehaviour
     /// </summary>
     public void PlaceBricks(bool usePool = true)
     {
-        DeleteChildren();
+        DeleteChildren(usePool);
         int row;
         int column;
         for (int brickIndex = 0; brickIndex < bricksAmount; brickIndex++)
@@ -27,13 +27,19 @@ public class SpawnBricks : MonoBehaviour
         }
     }
 
+    public void AddBricks() => bricksAmount = Mathf.Clamp(bricksAmount + maxColumns, 0, maxColumns * 7);
+
     /// <summary>
     /// Delete all spawned bricks
     /// </summary>
-    void DeleteChildren()
+    void DeleteChildren(bool usePool)
     {
         Transform myTransform = transform;
         while (myTransform.childCount > 0)
-            DestroyImmediate(myTransform.GetChild(0).gameObject);
+            if (usePool)
+                PoolManager.Instance.AddToPool(PoolID.Brick, myTransform.GetChild(0).gameObject);
+            else
+                DestroyImmediate(myTransform.GetChild(0).gameObject);
+
     }
 }
